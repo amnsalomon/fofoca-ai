@@ -19,7 +19,7 @@ Sugestão para o banner no site da loja: **“Quer uma fofoca? Veja o que saiu s
 - Serviço Cloudflare Worker, chave secreta, cache, limite diário global e indicadores persistentes.
 - Workflows para verificar o projeto e publicar no GitHub Pages e Cloudflare.
 
-**Estado da publicação:** página e painel publicados no GitHub Pages e conectados ao Worker `https://fofoca-ai-api.augusto-866.workers.dev`. Oito testes de serviço passaram também no GitHub Actions. O serviço exige `OPENAI_API_KEY` cadastrado como Secret nas configurações do Worker e aplicado com Deploy. Sem esse segredo, buscas e indicadores mostram o estado de preparação. Não há notícias ou métricas fictícias na página pública.
+**Estado da publicação:** página e painel publicados no GitHub Pages e conectados ao Worker `https://fofoca-ai-api.augusto-866.workers.dev`. Uma pesquisa real por Ana Maria Braga retornou três notícias com datas e fontes em 27/09/2026; os indicadores registraram visita, digitação, busca e clique em fonte. Oito testes de serviço passaram também no GitHub Actions. O serviço exige `OPENAI_API_KEY` cadastrado como Secret nas configurações do Worker e aplicado com Deploy. Sem esse segredo, buscas e indicadores mostram o estado de preparação. Não há notícias ou métricas fictícias na página pública.
 
 ## Como funciona a chave secreta
 
@@ -40,10 +40,12 @@ Repositório: **`amnsalomon/fofoca-ai`**.
 3. Em **Actions**, execute **Publicar página**. Futuras alterações na `main` também publicam a página automaticamente.
 4. Acompanhe o workflow até terminar. A URL real aparece no ambiente `github-pages`.
 
-Endereços publicados e conferidos:
+Endereços do domínio personalizado configurado no GitHub Pages:
 
-- Página: `https://amnsalomon.github.io/fofoca-ai/`
-- Painel: `https://amnsalomon.github.io/fofoca-ai/c7m2/`
+- Página: `https://fofoca.diravena.com.br/`
+- Painel: `https://fofoca.diravena.com.br/c7m2/`
+
+Os endereços anteriores em `https://amnsalomon.github.io/fofoca-ai/` redirecionam para o domínio personalizado. Na verificação de 27/09/2026, o GitHub indicava que o certificado HTTPS do novo domínio ainda estava sendo emitido. As buscas foram conferidas na página já carregada pelo endereço anterior; a disponibilidade HTTPS do domínio novo precisa ser confirmada após a emissão.
 
 O deploy da página foi concluído pelo workflow **Publicar página**. A mesma URL pública do Worker conecta as buscas e o painel. O endpoint `/health` informa se o segredo está disponível; `ready` confirma sua presença, mas não comprova a validade da chave nem o acesso ao modelo.
 
@@ -100,7 +102,7 @@ A página já está conectada a `https://fofoca-ai-api.augusto-866.workers.dev` 
 
 Execute novamente **Publicar página**. A mesma configuração conecta o painel de indicadores.
 
-`wrangler.jsonc` já permite a origem `https://amnsalomon.github.io`. Se usar um domínio próprio, ajuste `ALLOWED_ORIGINS`, publique novamente o Worker e inclua a origem da API em `connect-src` nas duas páginas HTML caso também personalize o domínio da API. O configurador automático aceita apenas origens `*.workers.dev` por padrão.
+`wrangler.jsonc` permite as origens `https://amnsalomon.github.io` e `https://fofoca.diravena.com.br`. Ao trocar o domínio da página, ajuste `ALLOWED_ORIGINS` e publique novamente o Worker. Inclua a origem da API em `connect-src` nas duas páginas HTML caso também personalize o domínio da API. O configurador automático aceita apenas origens `*.workers.dev` por padrão.
 
 ## Painel `/c7m2/`
 
@@ -156,7 +158,7 @@ npm run serve
 
 `npm run serve` abre a página local na porta 4173; precisa de Python 3. Para testar o Worker localmente, use Wrangler, uma chave de projeto de teste em `.dev.vars` (ignorado pelo Git) e ajuste explicitamente a origem permitida. Não relaxe o HTTPS/CSP da publicação para testes locais.
 
-Verificação em navegador concluída para a página publicada em desktop, carregamento da imagem, busca em estado de preparação, aviso de privacidade e filtro personalizado do painel. A visualização mobile foi implementada em CSS, mas não foi emulada nesta verificação. O Worker foi publicado e a conexão com a página foi conferida em 27/09/2026. A validação inicial do endpoint de métricas respondeu com sucesso, mas a versão seguinte passou a indicar ausência de `OPENAI_API_KEY`. Após cadastrar o Secret e aplicar com Deploy, ainda é necessário concluir uma consulta real, conferir as fontes e checar se visita, busca e clique aparecem no painel. A API experimental WebMCP não foi validada em contexto compatível.
+Verificação em navegador concluída para a página publicada em desktop, carregamento da imagem, busca em estado de preparação, aviso de privacidade e filtro personalizado do painel. Em 27/09/2026, após a configuração da chave, uma busca real por Ana Maria Braga exibiu três notícias com datas e links; um link de matéria da UOL foi conferido. A API de métricas registrou os aumentos esperados em visitas, digitação, buscas, buscas com notícias e cliques nas fontes. As contagens incluem esses testes. O domínio personalizado havia sido configurado e o GitHub ainda emitia seu certificado HTTPS. A visualização mobile foi implementada em CSS, mas não foi emulada nesta verificação. A API experimental WebMCP não foi validada em contexto compatível.
 
 ## Arquivos
 

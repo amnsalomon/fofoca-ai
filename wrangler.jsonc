@@ -5,7 +5,7 @@
   "compatibility_date": "2026-09-01",
   "workers_dev": true,
   "vars": {
-    "ALLOWED_ORIGINS": "https://amnsalomon.github.io",
+    "ALLOWED_ORIGINS": "https://amnsalomon.github.io,https://fofoca.diravena.com.br",
     "DAILY_API_LIMIT": "200",
     "IP_SEARCHES_PER_MINUTE": "30"
   },
