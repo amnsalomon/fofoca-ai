@@ -19,7 +19,7 @@ Sugestão para o banner no site da loja: **“Quer uma fofoca? Veja o que saiu s
 - Serviço Cloudflare Worker, chave secreta, cache, limite diário global e indicadores persistentes.
 - Workflows para verificar o projeto e publicar no GitHub Pages e Cloudflare.
 
-**Estado da publicação:** página e painel publicados no GitHub Pages. Oito testes de serviço passaram também no GitHub Actions. A chamada real à OpenAI e a coleta de indicadores dependem da configuração da chave e da ativação do Worker; essa etapa ainda está pendente. Não há notícias ou métricas fictícias na página pública.
+**Estado da publicação:** página e painel publicados no GitHub Pages e conectados ao Worker `https://fofoca-ai-api.augusto-866.workers.dev`. Oito testes de serviço passaram também no GitHub Actions. O serviço exige `OPENAI_API_KEY` cadastrado como Secret nas configurações do Worker e aplicado com Deploy. Sem esse segredo, buscas e indicadores mostram o estado de preparação. Não há notícias ou métricas fictícias na página pública.
 
 ## Como funciona a chave secreta
 
@@ -45,7 +45,7 @@ Endereços publicados e conferidos:
 - Página: `https://amnsalomon.github.io/fofoca-ai/`
 - Painel: `https://amnsalomon.github.io/fofoca-ai/c7m2/`
 
-O deploy da página foi concluído pelo workflow **Publicar página**. O painel abre, mas só passará a receber dados depois de conectar o serviço.
+O deploy da página foi concluído pelo workflow **Publicar página**. A mesma URL pública do Worker conecta as buscas e o painel. O endpoint `/health` informa se o segredo está disponível; `ready` confirma sua presença, mas não comprova a validade da chave nem o acesso ao modelo.
 
 Sem o serviço conectado, a interface abre normalmente e mostra que a pesquisa está em preparação. Não simula uma resposta nem pede chave à visitante.
 
@@ -53,7 +53,9 @@ Sem o serviço conectado, a interface abre normalmente e mostra que a pesquisa e
 
 ### 1. Publicar o Worker a partir do repositório
 
-O workflow **Publicar serviço de notícias** já está incluído. Na conta Cloudflare, obtenha um token com permissão para editar Workers na conta escolhida e o Account ID. No GitHub, em **Settings → Secrets and variables → Actions → Secrets**, adicione:
+A integração nativa da Cloudflare já foi conectada ao repositório. Para refazer a configuração: **Compute & AI → Workers & Pages → Create application → Import a repository**, selecione `amnsalomon/fofoca-ai`, use o nome `fofoca-ai-api`, mantenha o diretório na raiz e o Build command vazio, e use `npx wrangler deploy` como Deploy command. Cadastre o segredo de execução depois da publicação.
+
+Como alternativa, o workflow **Publicar serviço de notícias** já está incluído. Na conta Cloudflare, obtenha um token com permissão para editar Workers na conta escolhida e o Account ID. No GitHub, em **Settings → Secrets and variables → Actions → Secrets**, adicione:
 
 | Nome | Valor |
 | --- | --- |
@@ -90,7 +92,7 @@ Confirme que o projeto da chave possui crédito, acesso ao modelo `gpt-5.6-luna`
 
 ### 3. Conectar a página ao Worker
 
-Depois da publicação, copie a URL HTTPS real do Worker. No GitHub, abra **Settings → Secrets and variables → Actions → Variables** e crie:
+A página já está conectada a `https://fofoca-ai-api.augusto-866.workers.dev` pelo endereço padrão no workflow `.github/workflows/pages.yml`. Para trocar esse endereço, no GitHub abra **Settings → Secrets and variables → Actions → Variables** e crie ou atualize:
 
 | Nome | Valor |
 | --- | --- |
@@ -154,7 +156,7 @@ npm run serve
 
 `npm run serve` abre a página local na porta 4173; precisa de Python 3. Para testar o Worker localmente, use Wrangler, uma chave de projeto de teste em `.dev.vars` (ignorado pelo Git) e ajuste explicitamente a origem permitida. Não relaxe o HTTPS/CSP da publicação para testes locais.
 
-Verificação em navegador concluída para a página publicada em desktop, carregamento da imagem, busca em estado de preparação, aviso de privacidade e filtro personalizado do painel. A visualização mobile foi implementada em CSS, mas não foi emulada nesta verificação. Ainda é necessário publicar o Worker, fazer uma consulta real, conferir as fontes e checar se visita, busca e clique aparecem no painel. A API experimental WebMCP não foi validada em contexto compatível.
+Verificação em navegador concluída para a página publicada em desktop, carregamento da imagem, busca em estado de preparação, aviso de privacidade e filtro personalizado do painel. A visualização mobile foi implementada em CSS, mas não foi emulada nesta verificação. O Worker foi publicado e a conexão com a página foi conferida em 27/09/2026. A validação inicial do endpoint de métricas respondeu com sucesso, mas a versão seguinte passou a indicar ausência de `OPENAI_API_KEY`. Após cadastrar o Secret e aplicar com Deploy, ainda é necessário concluir uma consulta real, conferir as fontes e checar se visita, busca e clique aparecem no painel. A API experimental WebMCP não foi validada em contexto compatível.
 
 ## Arquivos
 
