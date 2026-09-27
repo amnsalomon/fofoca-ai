@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6b1735">
+  <meta name="description" content="Seu artista favorito, as novidades e uma boa conversa. Descubra notícias com data e fontes no Fofoca Aí!">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://*.workers.dev; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <meta property="og:title" content="Fofoca Aí! — Quer uma fofoca?">
+  <meta property="og:description" content="Um intervalo para descobrir as novidades do seu artista favorito. Com fontes, sem inventar história.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <title>Fofoca Aí! · Quer uma fofoca?</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./config.js" defer></script>
+  <script src="./common.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#artist">Ir para a busca</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="Fofoca Aí! Início"><span class="brand-mark" aria-hidden="true">f<span>!</span></span><span>fofoca <i>aí!</i></span></a>
+    <span class="header-note">Sua pausa para uma boa fofoca.</span>
+    <a class="about-link" href="#como-funciona">Como funciona <span aria-hidden="true">↗</span></a>
+  </header>
+  <main class="page-shell">
+    <section class="discovery" aria-labelledby="main-title">
+      <div class="discovery-content">
+        <p class="eyebrow"><span aria-hidden="true">✳</span> ENTRE AMIGAS, SEMPRE RENDE ASSUNTO.</p>
+        <h1 id="main-title">Quer uma<br><em>fofoca?</em></h1>
+        <p class="intro">Escolha seu artista favorito.<br>A gente te conta o que saiu na imprensa.</p>
+        <form id="search-form" novalidate>
+          <label for="artist">De qual artista você quer saber?</label>
+          <div class="search-box">
+            <span class="search-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10.8" cy="10.8" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></span>
+            <input id="artist" name="artist" type="text" placeholder="Ex.: Ivete Sangalo" autocomplete="off" enterkeyhint="search" maxlength="80" aria-describedby="input-hint input-error" required>
+            <button class="search-button" id="search-button" type="submit">Me conta! <span aria-hidden="true">↗</span></button>
+          </div>
+          <p id="input-error" class="input-error" role="alert" hidden></p>
+          <p id="input-hint" class="field-hint">Digite um nome ou escolha alguém aqui embaixo.</p>
+        </form>
+        <div class="suggestions" aria-label="Sugestões de artistas">
+          <button type="button" data-artist="Ivete Sangalo">Ivete Sangalo</button>
+          <button type="button" data-artist="Ana Maria Braga">Ana Maria Braga</button>
+          <button type="button" data-artist="Xuxa Meneghel">Xuxa</button>
+          <button type="button" data-artist="Roberto Carlos">Roberto Carlos</button>
+          <button type="button" data-artist="Claudia Raia">Claudia Raia</button>
+          <button type="button" data-artist="Fátima Bernardes">Fátima Bernardes</button>
+        </div>
+      </div>
+      <aside class="editorial-panel" aria-label="Uma pausa para uma boa conversa">
+        <div class="art-label"><span>O CAFÉ É SEU.</span><span>A NOVIDADE É NOSSA. <span aria-hidden="true">✦</span></span></div>
+        <img src="./assets/conversa.webp" alt="Ilustração de duas amigas conversando com um café e um celular." width="1100" height="733" fetchpriority="high">
+        <div class="art-caption"><span>Fofoca boa<br><em>tem fonte.</em></span><span class="caption-stamp" aria-hidden="true">fa<br>!</span></div>
+      </aside>
+    </section>
+
+    <section id="results" class="results" tabindex="-1" aria-labelledby="results-title" hidden>
+      <div class="results-heading"><div><p id="results-kicker" class="eyebrow">ACABOU DE CHEGAR NA CONVERSA</p><h2 id="results-title">O que está acontecendo</h2></div><span id="checked-at" class="checked-at"></span></div>
+      <div id="result-status" role="status" aria-live="polite"></div>
+      <div id="news-grid" class="news-grid"></div>
+      <p id="results-footnote" class="results-footnote" hidden>Resumos produzidos com inteligência artificial. Confira os detalhes na fonte original.</p>
+    </section>
+
+    <div class="trust-strip" aria-label="Sobre as notícias"><span><span aria-hidden="true">↗</span> Fontes para você conferir</span><span><span aria-hidden="true">◷</span> Data em cada notícia</span><span><span aria-hidden="true">♡</span> Fácil de compartilhar</span></div>
+
+    <section class="how-it-works" id="como-funciona" aria-labelledby="how-title">
+      <div><p class="eyebrow">CURIOSIDADE SIM. HISTÓRIA INVENTADA, NÃO.</p><h2 id="how-title">A fofoca chama.<br>A fonte confirma.</h2></div>
+      <div class="how-copy"><p>Você escolhe o artista. A gente pesquisa publicações na web e reúne até três novidades, com a data e o link de quem publicou.</p><p>Se não encontrarmos uma notícia recente com fonte, vamos contar isso também. Por aqui, boato não vira fato.</p></div>
+    </section>
+  </main>
+  <footer class="site-footer"><span class="footer-brand">fofoca <i>aí!</i></span><span>Sua pausa para uma boa fofoca.</span><button id="privacy-open" type="button">Privacidade</button></footer>
+  <dialog id="privacy-dialog" aria-labelledby="privacy-title"><button class="dialog-close" type="button" id="privacy-close" aria-label="Fechar">×</button><p class="eyebrow">CONVERSA TRANSPARENTE</p><h2 id="privacy-title">Sua busca, com cuidado.</h2><p>Não pedimos cadastro. O nome do artista é enviado ao nosso serviço de pesquisa, que usa a OpenAI para buscar e resumir notícias públicas.</p><p>Guardamos no navegador um identificador aleatório que muda a cada dia para estimar visitas. Contamos buscas, cliques e compartilhamentos de forma agregada, por até 90 dias. Não enviamos seu histórico de navegação nem o endereço da página de onde você veio.</p><p>Para evitar abuso, usamos também um identificador temporário derivado do endereço de internet. Esses identificadores são removidos em até 48 horas. Notícias podem ficar em cache por uma hora. O provedor de infraestrutura pode manter registros técnicos conforme suas próprias regras.</p><p>Não usamos anúncios ou cookies de marketing. Ao abrir uma fonte ou compartilhar no WhatsApp, passam a valer as regras desses serviços.</p><button type="button" class="button-secondary" id="privacy-done">Entendi</button></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><p class="noscript">Ative o JavaScript do navegador para pesquisar notícias.</p></noscript>
+</body>
+</html>

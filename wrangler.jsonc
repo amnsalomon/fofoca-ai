@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "fofoca-ai-api",
+  "main": "worker/index.mjs",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": true,
+  "vars": {
+    "ALLOWED_ORIGINS": "https://amnsalomon.github.io",
+    "DAILY_API_LIMIT": "200",
+    "IP_SEARCHES_PER_MINUTE": "30"
+  },
+  "durable_objects": {"bindings": [{"name":"ROOM","class_name":"NewsRoom"}]},
+  "migrations": [{"tag":"v1","new_sqlite_classes":["NewsRoom"]}],
+  "observability": {"enabled": false}
+}

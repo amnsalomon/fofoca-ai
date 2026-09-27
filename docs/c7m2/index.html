@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow, noarchive"><meta name="theme-color" content="#6b1735"><meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://*.workers.dev; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+  <title>Sala de conversa · Fofoca Aí!</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../styles.css"><link rel="stylesheet" href="./panel.css">
+  <script src="../config.js" defer></script><script src="../common.js" defer></script><script src="./panel.js" defer></script>
+</head>
+<body>
+  <header class="site-header"><a class="brand" href="../"><span class="brand-mark" aria-hidden="true">f<span>!</span></span><span>fofoca <i>aí!</i></span></a><a class="about-link" href="../">Abrir a página ↗</a></header>
+  <main class="panel-shell">
+    <div class="panel-heading"><div><p class="eyebrow">A CONVERSA EM NÚMEROS</p><h1>Sala de <em>conversa.</em></h1><p class="panel-subtitle">Quem chega, o que procura e o que compartilha.</p></div><button type="button" class="button-secondary" id="refresh">Atualizar</button></div>
+    <form class="filters" id="filters"><label for="period">Período<select id="period" name="period"><option value="today">Hoje</option><option value="7d" selected>Últimos 7 dias</option><option value="30d">Últimos 30 dias</option><option value="month">Mês atual</option><option value="last_month">Mês anterior</option><option value="custom">Escolher datas</option></select></label><div id="custom-dates" hidden><label for="from">De<input type="date" id="from"></label><label for="to">Até<input type="date" id="to"></label><button class="button-secondary" type="submit">Aplicar</button></div><span id="updated" class="update-time">Horário de Brasília</span></form>
+    <p id="panel-status" class="panel-status" role="status" aria-live="polite"></p>
+    <div class="stats-grid" aria-label="Indicadores principais">
+      <article class="stat-card accent"><p>Visitantes estimados</p><strong id="visitors">—</strong><span>Soma dos únicos de cada dia</span></article>
+      <article class="stat-card"><p>Visitas à página</p><strong id="views">—</strong><span>Inclui retornos e recargas</span></article>
+      <article class="stat-card"><p>Buscas realizadas</p><strong id="searches">—</strong><span>Nomes enviados para pesquisa</span></article>
+      <article class="stat-card"><p>Cliques nas fontes</p><strong id="source_clicks">—</strong><span>Intenção de ler a notícia original</span></article>
+      <article class="stat-card"><p>Cliques no WhatsApp</p><strong id="shares">—</strong><span>Aberturas do compartilhamento</span></article>
+      <article class="stat-card"><p>Notícias copiadas</p><strong id="copies">—</strong><span>Cópias concluídas</span></article>
+    </div>
+    <div class="panel-columns">
+      <section class="panel-card" aria-labelledby="activity-title"><div class="section-heading"><h2 id="activity-title">Movimento da conversa</h2><div class="legend"><span>Visitas</span><span>Buscas</span></div></div><div id="activity-chart" class="activity-chart"><p class="empty-text">O gráfico aparece após a conexão dos indicadores.</p></div><details><summary>Ver números por dia</summary><div class="table-scroll"><table><thead><tr><th>Data</th><th>Visitantes/dia</th><th>Visitas</th><th>Buscas</th><th>Com notícias</th></tr></thead><tbody id="daily-table"></tbody></table></div></details></section>
+      <section class="panel-card" aria-labelledby="artists-title"><h2 id="artists-title">Quem está na conversa</h2><p class="muted">Artistas mais consultados, entre buscas com notícias.</p><ol id="artists-list" class="artists-list"><li class="empty-text">Os nomes aparecerão após as primeiras pesquisas.</li></ol></section>
+    </div>
+    <section class="panel-card" aria-labelledby="journey-title"><h2 id="journey-title">Da curiosidade à notícia</h2><div class="journey"><div><span>Começou a digitar</span><strong id="inputs">—</strong></div><div><span>Clicou em uma sugestão</span><strong id="suggestions">—</strong></div><div><span>Busca com notícias</span><strong id="successes">—</strong></div><div><span>Busca sem novidade</span><strong id="empty">—</strong></div><div><span>Busca indisponível</span><strong id="errors">—</strong></div></div></section>
+    <section class="panel-card usage-card" aria-labelledby="usage-title"><div><h2 id="usage-title">Uso da pesquisa</h2><p class="muted">O cache reaproveita notícias recentes e reduz novas chamadas.</p></div><div><span>Chamadas à OpenAI no período</span><strong id="api_calls">—</strong></div><div><span>Respostas reaproveitadas</span><strong id="cache_hits">—</strong></div><div><span>Limite de chamadas de hoje</span><strong id="budget">—</strong></div></section>
+    <p class="metrics-note">“Visitantes estimados” conta navegadores únicos por dia; uma pessoa pode ser contada novamente em outro dia ou aparelho. Cliques no WhatsApp não confirmam que a mensagem foi enviada. Bloqueadores, robôs e falhas de conexão podem afetar as contagens. Dados agregados dos últimos 90 dias.</p>
+  </main>
+  <footer class="site-footer"><span class="footer-brand">fofoca <i>aí!</i></span><span>Uma boa conversa também se acompanha.</span></footer>
+</body></html>
