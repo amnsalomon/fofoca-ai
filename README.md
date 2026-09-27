@@ -19,7 +19,7 @@ Sugestão para o banner no site da loja: **“Quer uma fofoca? Veja o que saiu s
 - Serviço Cloudflare Worker, chave secreta, cache, limite diário global e indicadores persistentes.
 - Workflows para verificar o projeto e publicar no GitHub Pages e Cloudflare.
 
-**Verificação:** oito testes de serviço aprovados. A chamada real à OpenAI depende da configuração da chave e da ativação do Worker. Não há notícias ou métricas fictícias na página pública.
+**Estado da publicação:** página e painel publicados no GitHub Pages. Oito testes de serviço passaram também no GitHub Actions. A chamada real à OpenAI e a coleta de indicadores dependem da configuração da chave e da ativação do Worker; essa etapa ainda está pendente. Não há notícias ou métricas fictícias na página pública.
 
 ## Como funciona a chave secreta
 
@@ -40,12 +40,12 @@ Repositório: **`amnsalomon/fofoca-ai`**.
 3. Em **Actions**, execute **Publicar página**. Futuras alterações na `main` também publicam a página automaticamente.
 4. Acompanhe o workflow até terminar. A URL real aparece no ambiente `github-pages`.
 
-Se o nome sugerido estiver disponível, os endereços esperados serão:
+Endereços publicados e conferidos:
 
 - Página: `https://amnsalomon.github.io/fofoca-ai/`
 - Painel: `https://amnsalomon.github.io/fofoca-ai/c7m2/`
 
-Esses endereços são previstos, **não comprovantes de publicação**.
+O deploy da página foi concluído pelo workflow **Publicar página**. O painel abre, mas só passará a receber dados depois de conectar o serviço.
 
 Sem o serviço conectado, a interface abre normalmente e mostra que a pesquisa está em preparação. Não simula uma resposta nem pede chave à visitante.
 
@@ -154,7 +154,7 @@ npm run serve
 
 `npm run serve` abre a página local na porta 4173; precisa de Python 3. Para testar o Worker localmente, use Wrangler, uma chave de projeto de teste em `.dev.vars` (ignorado pelo Git) e ajuste explicitamente a origem permitida. Não relaxe o HTTPS/CSP da publicação para testes locais.
 
-Ainda é necessário, após ativar as contas: verificar deploy de Pages e Worker, fazer uma consulta real, conferir as fontes e checar se visita, busca e clique aparecem no painel. A validação visual mobile/desktop e a API experimental WebMCP não puderam ser verificadas em navegador nesta entrega.
+Verificação em navegador concluída para a página publicada em desktop, carregamento da imagem, busca em estado de preparação, aviso de privacidade e filtro personalizado do painel. A visualização mobile foi implementada em CSS, mas não foi emulada nesta verificação. Ainda é necessário publicar o Worker, fazer uma consulta real, conferir as fontes e checar se visita, busca e clique aparecem no painel. A API experimental WebMCP não foi validada em contexto compatível.
 
 ## Arquivos
 
